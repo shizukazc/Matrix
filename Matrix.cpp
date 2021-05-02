@@ -88,7 +88,7 @@ double operator*(const Vector &v1, const Vector &v2)
 
     for (unsigned int i = 0; i < v1.len(); i++)
     {
-        tot += v1[i] + v2[i];
+        tot += v1[i] * v2[i];
     }
 
     return tot;

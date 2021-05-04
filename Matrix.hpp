@@ -32,7 +32,14 @@ public:
         vec.insert(vec.begin(), len_, init_value_);
     }
 
+    // Constructor accepts lvalue reference
     Vector(std::vector<double> &v)
+    {
+        vec = std::move(v);
+    }
+
+    // Vector accepts rvalue reference
+    Vector(std::vector<double> &&v)
     {
         vec = std::move(v);
     }
@@ -145,12 +152,12 @@ double stdevs(const Vector &v);
 Matrix operator+(const Matrix &m1, const Matrix &m2);
 Matrix operator-(const Matrix &m1, const Matrix &m2);
 Matrix operator*(const Matrix &m1, const Matrix &m2);
-Matrix operator*(const Matrix &m, const double c);
-Matrix operator*(const double c, const Matrix &m);
+Matrix operator*(const Matrix &m, const double k);
+Matrix operator*(const double k, const Matrix &m);
 
 void operator+=(Matrix &m1, const Matrix &m2);
 void operator-=(Matrix &m1, const Matrix &m2);
-void operator*=(Matrix &m, const double c);
+void operator*=(Matrix &m, const double k);
 
 Vector sum(const Matrix &m, unsigned int axis = 0);
 Vector mean(const Matrix &m, unsigned int axis = 0);

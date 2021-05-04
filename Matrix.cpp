@@ -251,7 +251,7 @@ Matrix operator*(const Matrix &m1, const Matrix &m2)
             tot = 0.;
             for (unsigned int k = 0; k < ncol1; k++)
             {
-                tot += m1[r][k] + m2[k][c];
+                tot += m1[r][k] * m2[k][c];
             }
             m[r][c] = tot;
         }
@@ -260,16 +260,16 @@ Matrix operator*(const Matrix &m1, const Matrix &m2)
     return m;
 }
 
-Matrix operator*(const Matrix &m, const double c)
+Matrix operator*(const Matrix &m, const double k)
 {
     Matrix m_new(m);
-    m_new *= c;
+    m_new *= k;
     return m_new;
 }
 
-Matrix operator*(const double c, const Matrix &m)
+Matrix operator*(const double k, const Matrix &m)
 {
-    return m * c;
+    return m * k;
 }
 
 void operator+=(Matrix &m1, const Matrix &m2)
@@ -320,7 +320,7 @@ void operator-=(Matrix &m1, const Matrix &m2)
     }
 }
 
-void operator*=(Matrix &m, const double c)
+void operator*=(Matrix &m, const double k)
 {
     unsigned int nrow = m.row();
     unsigned int ncol = m.col();
@@ -329,7 +329,7 @@ void operator*=(Matrix &m, const double c)
     {
         for (unsigned int c = 0; c < ncol; c++)
         {
-            m[r][c] *= c;
+            m[r][c] *= k;
         }
     }
 }
@@ -607,6 +607,7 @@ std::ostream & operator<<(std::ostream &out, const Matrix &m)
             out << m[r][c];
         }
         out << "]";
+        if (r != m.row() - 1) out << std::endl;
     }
     out << "]";
 
